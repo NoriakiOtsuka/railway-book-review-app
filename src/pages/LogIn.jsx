@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from 'react-router-dom'
@@ -21,14 +20,6 @@ export const LogIn = () => {
   const handleEmailChange = (e) => setEmail(e.target.value)
   const handlePasswordChange = (e) => setPassword(e.target.value)
   const onLogIn = () => {
-    axios
-      .post(`${url}/signin`, { email: email, password: password })
-      .then((res) => {
-        navigate('/')
-      })
-      .catch((err) => {
-        setErrorMessage(`ログインに失敗しました。${err}`)
-      })
   }
 
   const onSubmit = (data) => console.log(data)
@@ -51,6 +42,7 @@ export const LogIn = () => {
             })}
             type="email"
             className="email-input"
+            aria-label='email'
             onChange={handleEmailChange}
           />
           {errors.email?.message && (
@@ -72,6 +64,7 @@ export const LogIn = () => {
             })}
             type="password"
             className="password-input"
+            aria-label='password'
             onChange={handlePasswordChange}
           />
           {errors.password?.type === 'required' && (
