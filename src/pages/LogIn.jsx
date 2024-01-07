@@ -1,4 +1,6 @@
+import axios from 'axios'
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from 'react-router-dom'
 
@@ -7,6 +9,7 @@ import { url } from '../const'
 import './login.scss'
 
 export const LogIn = () => {
+  const TAG = "LogIn"
   const {
     register,
     handleSubmit,
@@ -17,9 +20,20 @@ export const LogIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState()
+  const [cookies, setCookie, removeCookie] = useCookies()
   const handleEmailChange = (e) => setEmail(e.target.value)
   const handlePasswordChange = (e) => setPassword(e.target.value)
+
   const onLogIn = () => {
+    axios
+      .post(`${url}/signin`, { email: email, password: password })
+      .then((res) => {
+        setCookie('token', res.data.token)
+        navigate('/')
+      })
+      .catch((err) => {
+        setErrorMessage(`ログインに失敗しました。${err}`)
+      })
   }
 
   const onSubmit = (data) => console.log(data)

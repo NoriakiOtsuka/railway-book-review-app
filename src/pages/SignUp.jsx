@@ -1,13 +1,17 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import imageCompression from 'browser-image-compression'
+import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from 'react-router-dom'
 
 import { Header } from '../components/Header'
+import { ImageUpload } from '../components/ImageUpload'
 import { url } from '../const'
 import './signUp.scss'
 
 export const SignUp = () => {
+  const TAG = "SignUp"
   const {
     register,
     handleSubmit,
@@ -19,23 +23,70 @@ export const SignUp = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState()
+  const [icon, setIcon] = useState([])
+  const [cookies, setCookie, removeCookie] = useCookies()
   const handleEmailChange = (e) => setEmail(e.target.value)
   const handleNameChange = (e) => setName(e.target.value)
   const handlePasswordChange = (e) => setPassword(e.target.value)
+  const handleIconChange = (file) => setIcon(file)
+
   const onSignUp = () => {
     const data = {
-      email: email,
       name: name,
+      email: email,
       password: password,
     }
 
     axios
       .post(`${url}/users`, data)
       .then((res) => {
+        const token = res.data.token
+        setCookie('token', token)
+
+        if (icon) {
+          handleCompressFile()
+        }
         navigate('/')
       })
       .catch((err) => {
         setErrorMessage(`サインアップに失敗しました。 ${err}`)
+      })
+  }
+
+  const handleCompressFile = async () => {
+    const options = {
+      maxSizeMB: 0.5,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      console.log(`${ TAG }: originalFile size ${icon.size / 1024 / 1024} MB`)
+      const compressedFile = await imageCompression(icon, options)
+      console.log(`${ TAG }: compressedFile size ${compressedFile.size / 1024 / 1024} MB`)
+      await postIcon(compressedFile)
+    } catch (error) {
+      console.log(`${ TAG }: ${error}`)
+    }
+  }
+
+  const postIcon = async (compressedFile) => {
+    const form = new FormData()
+    form.append('icon', compressedFile)
+    const config = {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer ' + cookies.token,
+      }
+    }
+
+    axios
+      .post(`${url}/uploads`, form, config)
+      .then((res) => {
+        console.log(`${ TAG }: icon url is ${res.data.iconUrl}`)
+      })
+      .catch((err) => {
+        setErrorMessage(`アイコンアップロードに失敗しました。 ${err}`)
       })
   }
 
@@ -105,6 +156,8 @@ export const SignUp = () => {
           {errors.password?.type === 'minLength' && (
             <p className="input-validation">{errors.password.message}</p>
           )}
+          <br />
+          <ImageUpload handleIconChange={handleIconChange} />
           <br />
           <button type="submit" className="signup-button" onClick={onSignUp}>
             作成
