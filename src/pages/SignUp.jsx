@@ -11,7 +11,7 @@ import { url } from '../const'
 import './signUp.scss'
 
 export const SignUp = () => {
-  const TAG = "SignUp"
+  const TAG = 'SignUp'
   const {
     register,
     handleSubmit,
@@ -60,12 +60,14 @@ export const SignUp = () => {
       useWebWorker: true,
     }
     try {
-      console.log(`${ TAG }: originalFile size ${icon.size / 1024 / 1024} MB`)
+      console.log(`${TAG}: originalFile size ${icon.size / 1024 / 1024} MB`)
       const compressedFile = await imageCompression(icon, options)
-      console.log(`${ TAG }: compressedFile size ${compressedFile.size / 1024 / 1024} MB`)
+      console.log(
+        `${TAG}: compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+      )
       await postIcon(compressedFile)
     } catch (error) {
-      console.log(`${ TAG }: ${error}`)
+      console.log(`${TAG}: ${error}`)
     }
   }
 
@@ -74,16 +76,16 @@ export const SignUp = () => {
     form.append('icon', compressedFile)
     const config = {
       headers: {
-        'accept': 'application/json',
+        accept: 'application/json',
         'Content-Type': 'multipart/form-data',
-        'Authorization': 'Bearer ' + cookies.token,
-      }
+        Authorization: 'Bearer ' + cookies.token,
+      },
     }
 
     axios
       .post(`${url}/uploads`, form, config)
       .then((res) => {
-        console.log(`${ TAG }: icon url is ${res.data.iconUrl}`)
+        console.log(`${TAG}: icon url is ${res.data.iconUrl}`)
       })
       .catch((err) => {
         setErrorMessage(`アイコンアップロードに失敗しました。 ${err}`)

@@ -9,7 +9,7 @@ import { url } from '../const'
 import './login.scss'
 
 export const LogIn = () => {
-  const TAG = "LogIn"
+  const TAG = 'LogIn'
   const {
     register,
     handleSubmit,
@@ -56,7 +56,7 @@ export const LogIn = () => {
             })}
             type="email"
             className="email-input"
-            aria-label='email'
+            aria-label="email"
             onChange={handleEmailChange}
           />
           {errors.email?.message && (
@@ -78,7 +78,7 @@ export const LogIn = () => {
             })}
             type="password"
             className="password-input"
-            aria-label='password'
+            aria-label="password"
             onChange={handlePasswordChange}
           />
           {errors.password?.type === 'required' && (

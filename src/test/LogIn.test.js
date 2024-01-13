@@ -9,16 +9,16 @@ describe('jest test', () => {
         <LogIn />
       </BrowserRouter>
     )
-    const emailLabel = screen.getByText("メールアドレス")
+    const emailLabel = screen.getByText('メールアドレス')
     expect(emailLabel).toBeInTheDocument()
-    const emailInput = screen.getByRole("textbox", {name: /email/i})
+    const emailInput = screen.getByRole('textbox', { name: /email/i })
     expect(emailInput).toBeInTheDocument()
-    const passwordLabel = screen.getByText("パスワード")
+    const passwordLabel = screen.getByText('パスワード')
     expect(passwordLabel).toBeInTheDocument()
     // const passwordInput = screen.getByRole("textbox", {name: /password/i})
     // expect(screen.getByRole("textbox")).toHaveAttribute("name", "email")
 
-    const buttonElement = screen.getByRole('button', { name: 'サインイン' });
+    const buttonElement = screen.getByRole('button', { name: 'サインイン' })
     fireEvent.click(buttonElement)
   })
 })

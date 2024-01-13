@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 
 import './imageUpload.scss'
 
@@ -39,15 +39,17 @@ export const ImageUpload = (props) => {
       />
       <div>
         <div>
-          {(icon.length !== 0) && icon.map(image => (
-            <div>
-              <img
-                src={image}
-                width={240}
-                height={240}
-                onClick={handleClearFile}/>
-            </div>
-          ))}
+          {icon.length !== 0 &&
+            icon.map((image) => (
+              <div>
+                <img
+                  src={image}
+                  width={240}
+                  height={240}
+                  onClick={handleClearFile}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>
