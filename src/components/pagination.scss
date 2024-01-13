@@ -1,0 +1,88 @@
+li {
+  & > a {
+    padding: 0.1rem 1rem;
+    border: gray 1px solid;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+}
+
+li.previous,
+li.next,
+li.break {
+  & > a {
+    border-color: transparent;
+  }
+}
+
+li.active a {
+  min-width: 32px;
+  background-color: #0366d6;
+  border-color: transparent;
+  color: white;
+}
+
+li.disabled a {
+  color: grey;
+}
+
+li.disable,
+li.disabled a {
+  cursor: default;
+}
+
+
+.pagination {
+  margin: 0 auto;
+  display: flex;
+
+  & > li {
+    margin: 0 5px;
+    list-style-type: none;
+    & > a {
+      width: 24px;
+      height: 24px;
+      position: relative;
+      font-size: 0.8rem;
+      outline: none;
+      z-index: 100;
+      cursor: pointer;
+
+      &::before {
+        width: 24px;
+        height: 24px;
+        top: 50%;
+        left: 50%;
+        content: "";
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -100;
+      }
+
+      &:hover {
+        &::before {
+          background-color: rgba(255, 255, 255, 0.6);
+        }
+      }
+    }
+
+    &.active {
+      & > a::before {
+        background-color: rgba(255, 255, 255, 1);
+      }
+    }
+  }
+
+  &__previous,
+  &__next {
+    & > a {
+      font-size: 0.7rem;
+    }
+  }
+
+  &__disabled {
+    display: none;
+  }
+}
