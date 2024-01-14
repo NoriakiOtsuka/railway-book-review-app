@@ -25,6 +25,10 @@ export const Header = () => {
     navigate('/')
   }
 
+  const handleEditUser = () => {
+    navigate('/profile')
+  }
+
   useEffect(() => {
     if (auth === true) {
       const config = {
@@ -43,7 +47,9 @@ export const Header = () => {
       <h1>書籍レビュー</h1>
       {auth ? (
         <>
-          <h2 className="user-name__text">{name}</h2>
+          <button className="edit-user-page__button" onClick={handleEditUser}>
+            <h2 className="user-name__text">{name}</h2>
+          </button>
           <button onClick={handleSignOut} className="sign-out-button">
             サインアウト
           </button>

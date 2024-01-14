@@ -6,6 +6,7 @@ import { Home } from '../pages/Home'
 import { NotFound } from '../pages/NotFound'
 import { LogIn } from '../pages/LogIn'
 import { SignUp } from '../pages/SignUp'
+import { Profile } from '../pages/Profile'
 import { BookList } from '../pages/BookList'
 
 export const Router = () => {
@@ -19,6 +20,7 @@ export const Router = () => {
         {auth ? (
           <>
             <Route exact path="/" element={<BookList />} />
+            <Route exact path="/profile" element={<Profile />} />
           </>
         ) : (
           <>

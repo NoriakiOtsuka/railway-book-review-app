@@ -24,7 +24,7 @@ export const BookList = () => {
     axios
       .get(`${url}/books?offset=${offset}`, config)
       .then((res) => setBooks(res.data))
-  })
+  }, [])
 
   return (
     <div>

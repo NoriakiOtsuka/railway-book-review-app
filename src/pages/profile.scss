@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+.profile {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.edit-user {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.edit-user-form {
+  color: #555555;
+}
+
+.edit-user-name {
+  width: 300px;
+  margin-bottom: 25px;
+}
+
+.edit-user-button {
+  background-color: #242f9b;
+  color: #ffffff;
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.error-message {
+  color: #ff3333;
+}
+
+.user-icon__image {
+  width: 200px;
+}
