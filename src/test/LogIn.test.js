@@ -18,7 +18,7 @@ describe('jest test', () => {
     // const passwordInput = screen.getByRole("textbox", {name: /password/i})
     // expect(screen.getByRole("textbox")).toHaveAttribute("name", "email")
 
-    const buttonElement = screen.getByRole('button', { name: 'サインイン' })
+    const buttonElement = screen.getByRole('button', { name: 'ログイン' })
     fireEvent.click(buttonElement)
   })
 })

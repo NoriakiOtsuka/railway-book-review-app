@@ -9,7 +9,13 @@
   justify-content: space-between;
 }
 
+.user-name__text {
+  margin-left: auto;
+}
+
+.sign-in-button,
 .sign-out-button {
-  color: #ffffff;
   margin: auto 25px auto auto;
+  background-color: #00000000;
+  color: #ffffff;
 }

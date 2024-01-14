@@ -2,22 +2,26 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import imageCompression from 'browser-image-compression'
 import { useCookies } from 'react-cookie'
+import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-import { useNavigate, Link } from 'react-router-dom'
+import { Navigate, useNavigate, Link } from 'react-router-dom'
 
+import { signIn } from '../store/authSlice'
 import { Header } from '../components/Header'
 import { ImageUpload } from '../components/ImageUpload'
 import { url } from '../const'
 import './signUp.scss'
 
 export const SignUp = () => {
-  const TAG = 'SignUp'
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
+  const TAG = 'SignUp'
+  const auth = useSelector((state) => state.auth.isSignIn)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
@@ -41,6 +45,7 @@ export const SignUp = () => {
       .post(`${url}/users`, data)
       .then((res) => {
         const token = res.data.token
+        dispatch(signIn())
         setCookie('token', token)
 
         if (icon) {
@@ -91,6 +96,8 @@ export const SignUp = () => {
         setErrorMessage(`アイコンアップロードに失敗しました。 ${err}`)
       })
   }
+
+  if (auth) return <Navigate to="/" />
 
   const onSubmit = (data) => console.log(data)
 

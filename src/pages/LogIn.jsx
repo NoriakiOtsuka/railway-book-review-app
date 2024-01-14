@@ -1,21 +1,26 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { useSelector, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
-import { useNavigate, Link } from 'react-router-dom'
+import { Navigate, useNavigate, Link } from 'react-router-dom'
 
+import { signIn } from '../store/authSlice'
+import { signOut } from '../store/authSlice'
 import { Header } from '../components/Header'
 import { url } from '../const'
 import './login.scss'
 
 export const LogIn = () => {
-  const TAG = 'LogIn'
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
+  const TAG = 'LogIn'
+  const auth = useSelector((state) => state.auth.isSignIn)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -28,6 +33,7 @@ export const LogIn = () => {
     axios
       .post(`${url}/signin`, { email: email, password: password })
       .then((res) => {
+        dispatch(signIn())
         setCookie('token', res.data.token)
         navigate('/')
       })
@@ -36,13 +42,15 @@ export const LogIn = () => {
       })
   }
 
+  if (auth) return <Navigate to="/" />
+
   const onSubmit = (data) => console.log(data)
 
   return (
     <div>
       <Header />
       <main className="login">
-        <h2>サインイン</h2>
+        <h2>ログイン</h2>
         <p className="error-message">{errorMessage}</p>
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
           <label>メールアドレス</label>
@@ -89,7 +97,7 @@ export const LogIn = () => {
           )}
           <br />
           <button type="submit" className="login-button" onClick={onLogIn}>
-            サインイン
+            ログイン
           </button>
         </form>
         <Link to="/signup">新規作成</Link>

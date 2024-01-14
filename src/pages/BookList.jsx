@@ -14,7 +14,6 @@ export const BookList = () => {
   const handlePageChange = (value) => setOffset(value)
 
   useEffect(() => {
-    console.log('booklist')
     const config = {
       headers: {
         accept: 'application/json',

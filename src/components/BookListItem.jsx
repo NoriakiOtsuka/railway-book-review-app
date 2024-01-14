@@ -5,9 +5,6 @@ export const BookListItem = (props) => {
 
   return (
     <>
-      <div>
-        <p>{book.id}</p>
-      </div>
       <article className="booklist">
         <h2 className="booklist-title__text">{book.title}</h2>
         <p className="booklist-detail__text">詳細：{book.detail}</p>
