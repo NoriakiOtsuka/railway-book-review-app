@@ -8,6 +8,7 @@ import { LogIn } from '../pages/LogIn'
 import { SignUp } from '../pages/SignUp'
 import { Profile } from '../pages/Profile'
 import { BookList } from '../pages/BookList'
+import { BookNew } from '../pages/BookNew'
 
 export const Router = () => {
   const auth = useSelector((state) => state.auth.isSignIn)
@@ -20,6 +21,7 @@ export const Router = () => {
         {auth ? (
           <>
             <Route exact path="/" element={<BookList />} />
+            <Route exact path="/new" element={<BookNew />} />
             <Route exact path="/profile" element={<Profile />} />
           </>
         ) : (

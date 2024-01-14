@@ -14,7 +14,9 @@ export const Profile = () => {
   const [cookies, setCookie, removeCookie] = useCookies()
   const [errorMessage, setErrorMessage] = useState('')
   const handleNameChange = (e) => setName(e.target.value)
-  const onUpdateUser = () => {
+  const onUpdateUser = (e) => {
+    e.preventDefault()
+
     const data = {
       name: name,
     }
@@ -64,7 +66,7 @@ export const Profile = () => {
         <h2>ユーザー情報</h2>
         <img src={icon} className="user-icon__image" />
         <p className="error-message">{errorMessage}</p>
-        <form className="edit-user-form">
+        <form className="edit-user-form" onSubmit={onUpdateUser}>
           <label>ユーザー名</label>
           <br />
           <input
@@ -74,11 +76,7 @@ export const Profile = () => {
             value={name}
           />
           <br />
-          <button
-            type="button"
-            className="edit-user-button"
-            onClick={onUpdateUser}
-          >
+          <button type="submit" className="edit-user-button">
             更新
           </button>
         </form>
