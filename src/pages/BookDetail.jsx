@@ -20,7 +20,6 @@ export const BookDetail = () => {
   const { bookId } = useParams()
 
   const handleClick = () => {
-    console.log(`${TAG}: Book ID is ${book.id}`)
     navigate(`/edit/${book.id}`)
   }
 

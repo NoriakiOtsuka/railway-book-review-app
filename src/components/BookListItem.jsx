@@ -1,15 +1,38 @@
-import { useNavigate, Link } from 'react-router-dom'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
 
+import { url } from '../const'
 import './bookListItem.scss'
 
 export const BookListItem = (props) => {
   const TAG = 'BookListItem'
   const { book } = props
   const navigate = useNavigate()
+  const [cookies, setCookie, removeCookie] = useCookies()
+  const [errorMessage, setErrorMessage] = useState()
 
   const handleClick = () => {
-    console.log(`${TAG}: Book ID is ${book.id}`)
-    navigate(`/detail/${book.id}`)
+    const data = {
+      selectBookId: book.id,
+    }
+
+    const config = {
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer ' + cookies.token,
+      },
+    }
+
+    axios
+      .post(`${url}/logs`, data, config)
+      .then(() => {
+        navigate(`/detail/${book.id}`)
+      })
+      .catch((err) => {
+        setErrorMessage(`ログの送信に失敗しました。${err}`)
+      })
   }
 
   return (
