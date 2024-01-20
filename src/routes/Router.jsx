@@ -10,6 +10,7 @@ import { Profile } from '../pages/Profile'
 import { BookList } from '../pages/BookList'
 import { BookNew } from '../pages/BookNew'
 import { BookDetail } from '../pages/BookDetail'
+import { BookEdit } from '../pages/BookEdit'
 
 export const Router = () => {
   const auth = useSelector((state) => state.auth.isSignIn)
@@ -24,6 +25,7 @@ export const Router = () => {
             <Route exact path="/" element={<BookList />} />
             <Route exact path="/new" element={<BookNew />} />
             <Route path="/detail/:bookId" element={<BookDetail />} />
+            <Route path="/edit/:bookId" element={<BookEdit />} />
             <Route exact path="/profile" element={<Profile />} />
           </>
         ) : (

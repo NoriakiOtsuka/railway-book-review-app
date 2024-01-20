@@ -1,0 +1,37 @@
+.edit-book {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.edit-book-form {
+  color: #555555;
+}
+
+.edit-book-title,
+.edit-book-url,
+.edit-book-detail,
+.edit-book-review {
+  width: 300px;
+  margin-bottom: 25px;
+}
+
+.edit-book-update-button {
+  background-color: #242f9b;
+  color: #ffffff;
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.edit-book-delete-button {
+  margin-top: 10px;
+  background-color: #ff4500;
+  color: #ffffff;
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.error-message {
+  color: #ff3333;
+}
