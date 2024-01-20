@@ -9,6 +9,7 @@ import { SignUp } from '../pages/SignUp'
 import { Profile } from '../pages/Profile'
 import { BookList } from '../pages/BookList'
 import { BookNew } from '../pages/BookNew'
+import { BookDetail } from '../pages/BookDetail'
 
 export const Router = () => {
   const auth = useSelector((state) => state.auth.isSignIn)
@@ -22,6 +23,7 @@ export const Router = () => {
           <>
             <Route exact path="/" element={<BookList />} />
             <Route exact path="/new" element={<BookNew />} />
+            <Route path="/detail/:bookId" element={<BookDetail />} />
             <Route exact path="/profile" element={<Profile />} />
           </>
         ) : (

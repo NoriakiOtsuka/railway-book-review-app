@@ -2,8 +2,8 @@
 
 .booklist {
   width: auto;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 15%;
+  margin-right: 15%;
   border-radius: 20px;
   background-color: #f5f5f5;
 }
@@ -14,31 +14,27 @@
   color: #000000;
 }
 
-.booklist-detail__text {
-  margin-left: 25px;
+.booklist-review__text {
+  margin-left: 35px;
   text-align: left;
   color: #222222;
-}
-
-.booklist-url__text {
-  width: 35%;
-  margin-left: 60%;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.booklist-review__text {
-  margin-left: 25px;
-  margin-right: 25px;
+.booklist-reviewer__text--red {
+  margin-left: 35px;
   text-align: left;
-  overflow-wrap: break-word;
-  color: #222222;
+  color: #550000;
 }
 
-.booklist-reviewer__text--red {
-  margin-right: 20px;
-  text-align: right;
-  color: #550000;
+.bookdetail-button {
+  width: 60%;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #242f9b;
+  color: #ffffff;
 }
